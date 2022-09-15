@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.DTO.CardApiDTO;
+import com.example.demo.dto.CardApiDTO;
 import lombok.Data;
 
 import javax.persistence.*;

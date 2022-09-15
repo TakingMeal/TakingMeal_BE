@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.DTO.CardApiDTO;
+import com.example.demo.dto.CardApiDTO;
 import com.example.demo.entity.CardApiEntity;
 import com.example.demo.repository.CardRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package service;
+package com.example.demo.service;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

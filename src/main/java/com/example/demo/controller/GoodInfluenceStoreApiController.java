@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.DTO.InfluenceStoreDTO;
+import com.example.demo.dto.InfluenceStoreDTO;
 import com.example.demo.entity.InfluenceStoreEntity;
 import com.example.demo.repository.InfluenceStoreRepository;
 import lombok.RequiredArgsConstructor;

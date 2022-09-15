@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.DTO.InfluenceStoreDTO;
+import com.example.demo.dto.InfluenceStoreDTO;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,10 +1,8 @@
-package com.example.demo.DTO;
+package com.example.demo.dto;
 
-import com.example.demo.entity.CardApiEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
