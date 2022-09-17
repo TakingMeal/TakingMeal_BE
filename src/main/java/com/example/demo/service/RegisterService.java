@@ -20,7 +20,8 @@ public class RegisterService {
 
     private final MealRepository mealRepository;
 
-    public List<Meal> foodRegister(MealDto mealDto){
+    //식단 추가
+    public String foodRegister(MealDto mealDto){
 
         String userId = mealDto.getUserId();
         User user = userRepository.findUserByUserId(userId);
@@ -37,8 +38,10 @@ public class RegisterService {
 
         mealRepository.save(meal);
 
-        return null;
+        return "success";
     }
+
+
 
 
 }
