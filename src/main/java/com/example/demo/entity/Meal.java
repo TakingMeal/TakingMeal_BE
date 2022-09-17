@@ -37,7 +37,7 @@ public class Meal {
     @Column(name = "mealFat")
     private double mealFat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "uId")
     private User user;
 
@@ -46,15 +46,15 @@ public class Meal {
     private LocalDateTime mealAddTime;
 
     @Builder
-    public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat,
-                User user){
+    public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat
+               , User user ){
         this.mealName = mealName;
         this.mealAmount = mealAmount;
         this.mealCal = mealCal;
         this.mealCarbon = mealCarbon;
         this.mealProtein = mealProtein;
         this.mealFat = mealFat;
-        this.user = user;
+        this.user=user;
 
     }
 

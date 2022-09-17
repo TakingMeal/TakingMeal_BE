@@ -3,7 +3,10 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Meal;
 import com.example.demo.dto.MealDto;
+import com.example.demo.entity.User;
 import com.example.demo.repository.MealRepository;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.RegisterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,6 +37,12 @@ public class MealController {
 
     @Autowired
     private MealRepository mealRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    private final RegisterService registerService;
+
+
     @GetMapping("/search")
     public JSONArray foodRequest(@RequestParam("foodName") String foodName, HttpServletRequest request) throws ParseException {
 
@@ -150,15 +159,13 @@ public class MealController {
         return "hello world";
     }
 
+    //식단 추가 등록 api
     @PostMapping("/register")
     public String foodRegister(@RequestBody MealDto  mealDto){
 
-       /*Meal meal = Meal.registerMeal(mealDto.getMealName(), mealDto.getMealAmount(), mealDto.getMealCal(), mealDto.getMealCarbon(),
-               mealDto.getMealProtein(), mealDto.getMealFat());
+        registerService.foodRegister(mealDto);
 
-        System.out.println(meal);
-        mealRepository.save(meal);
-*/
+
         return "";
 
 
