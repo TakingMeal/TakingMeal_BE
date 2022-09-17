@@ -23,6 +23,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
+@CrossOrigin
 @RestController
 @RequestMapping("/food")
 @RequiredArgsConstructor
@@ -152,13 +153,15 @@ public class MealController {
     @PostMapping("/register")
     public String foodRegister(@RequestBody MealDto  mealDto){
 
-       Meal meal = Meal.registerMeal(mealDto.getMealName(), mealDto.getMealAmount(), mealDto.getMealCal(), mealDto.getMealCarbon(),
+       /*Meal meal = Meal.registerMeal(mealDto.getMealName(), mealDto.getMealAmount(), mealDto.getMealCal(), mealDto.getMealCarbon(),
                mealDto.getMealProtein(), mealDto.getMealFat());
 
         System.out.println(meal);
         mealRepository.save(meal);
-
+*/
         return "";
+
+
     }
 
 
