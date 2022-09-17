@@ -37,6 +37,8 @@ public class Meal {
     @Column(name = "mealFat")
     private double mealFat;
 
+    @JoinColumn
+
     @CreationTimestamp
     @Column(updatable = false, name = "mealAddTime")
     private LocalDateTime mealAddTime;
