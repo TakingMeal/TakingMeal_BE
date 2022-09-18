@@ -7,11 +7,11 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Objects;
 
 @Entity
 @Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
 @Table(name = "User")
@@ -19,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uId")
-    private Long id;
+    private Long uId;
 
     @Column(name = "userId")
     private String userId;
@@ -34,7 +34,7 @@ public class User {
     private String userGender;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Meal> meals = new ArrayList<>();
 
@@ -48,11 +48,12 @@ public class User {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        return uId != null && Objects.equals(uId, user.uId);
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

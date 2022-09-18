@@ -35,6 +35,10 @@ public class Meal {
     @Column(name = "mealFat")
     private double mealFat;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "uId")
+    private User user;
+
     @CreationTimestamp
     @Column(updatable = false, name = "mealAddTime")
     private LocalDateTime mealAddTime;
@@ -44,18 +48,20 @@ public class Meal {
     private User user;
 
     @Builder
-    public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat){
+    public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat
+               , User user ){
         this.mealName = mealName;
         this.mealAmount = mealAmount;
         this.mealCal = mealCal;
         this.mealCarbon = mealCarbon;
         this.mealProtein = mealProtein;
         this.mealFat = mealFat;
+        this.user=user;
 
     }
 
     public static Meal registerMeal(String mealName, double mealAmount, double mealCal, double mealCarbon,
-                                    double mealProtein, double mealFat){
+                                    double mealProtein, double mealFat, User user){
         return Meal.builder()
                 .mealName(mealName)
                 .mealAmount(mealAmount)
@@ -63,6 +69,7 @@ public class Meal {
                 .mealCarbon(mealCarbon)
                 .mealProtein(mealProtein)
                 .mealFat(mealFat)
+                .user(user)
                 .build();
     }
 

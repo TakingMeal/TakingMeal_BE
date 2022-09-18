@@ -2,9 +2,11 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.StoreCategory;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Data
 @Getter
 @NoArgsConstructor
 public class LocationApiDTO {
