@@ -43,10 +43,6 @@ public class Meal {
     @Column(updatable = false, name = "mealAddTime")
     private LocalDateTime mealAddTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uId")
-    private User user;
-
     @Builder
     public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat
                , User user ){
