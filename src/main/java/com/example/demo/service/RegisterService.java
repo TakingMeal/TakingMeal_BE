@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.MealDto;
-<<<<<<< HEAD
 import com.example.demo.dto.ResponseMealDto;
-=======
-        >>>>>>> 9b86f113c3b82a7909b769517491e61745c5c28a
 import com.example.demo.entity.Meal;
 import com.example.demo.entity.User;
 import com.example.demo.repository.MealRepository;
