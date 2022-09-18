@@ -169,6 +169,7 @@ public class MealController {
 
         return "";
     }
+    
 
     @GetMapping("/info/{userId}")
     public ResponseMealDto foodInfo(@PathVariable String userId){
