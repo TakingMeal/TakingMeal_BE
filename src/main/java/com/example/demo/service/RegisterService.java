@@ -24,9 +24,8 @@ public class RegisterService {
     private final MealRepository mealRepository;
 
     //식단 추가
-    public String foodRegister(MealDto mealDto){
+    public String foodRegister(MealDto mealDto, String userId){
 
-        String userId = mealDto.getUserId();
         User user = userRepository.findUserByUserId(userId);
         Meal meal = Meal.builder()
                 .user(user)

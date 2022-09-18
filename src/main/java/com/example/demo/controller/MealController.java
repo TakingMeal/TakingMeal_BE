@@ -161,10 +161,10 @@ public class MealController {
     }
 
     //식단 추가 등록 api
-    @PostMapping("/register")
-    public String foodRegister(@RequestBody MealDto  mealDto){
+    @PostMapping("/register/{userId}")
+    public String foodRegister(@RequestBody MealDto  mealDto, @PathVariable String userId){
 
-        registerService.foodRegister(mealDto);
+        registerService.foodRegister(mealDto, userId);
 
 
         return "";
