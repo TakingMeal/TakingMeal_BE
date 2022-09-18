@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.ResponseMealDto;
 import com.example.demo.entity.Meal;
 import com.example.demo.dto.MealDto;
 import com.example.demo.entity.User;
@@ -160,15 +161,21 @@ public class MealController {
     }
 
     //식단 추가 등록 api
-    @PostMapping("/register")
-    public String foodRegister(@RequestBody MealDto  mealDto){
+    @PostMapping("/register/{userId}")
+    public String foodRegister(@RequestBody MealDto  mealDto, @PathVariable String userId){
 
-        registerService.foodRegister(mealDto);
+        registerService.foodRegister(mealDto, userId);
 
 
         return "";
     }
     
+
+    @GetMapping("/info/{userId}")
+    public ResponseMealDto foodInfo(@PathVariable String userId){
+
+        return registerService.foodInfo(userId);
+    }
 
 
 }
