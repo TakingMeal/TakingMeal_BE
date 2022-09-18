@@ -27,7 +27,7 @@ public class MealDto {
 
     private double mealFat;
 
-    private User user;
+    private String userId;
 
 
 
