@@ -37,11 +37,11 @@ public class CommentService {
         return commentRepository.findByLocationOrderByCommentTimeDesc(location);
     }
     @Transactional
-    public List<Comment> add(Long storeId,
+    public List<Comment> add(Long storeId, String userId,
                              Map<String, String> map) throws Exception {
 
         Optional<Location> optional = locationRepository.findById(storeId);
-        User user = userRepository.findByUserId(map.get("userId"));
+        User user = userRepository.findByUserId(userId);
         String commentMessage = map.get("content");
 
         Location location;
@@ -54,7 +54,7 @@ public class CommentService {
                     .user(user)
                     .location(location)
                     .commentMessage(commentMessage)
-                    .writer(map.get("userId"))
+                    .writer(userId)
                     .build();
 
             Comment comment = new Comment(commentDTO);

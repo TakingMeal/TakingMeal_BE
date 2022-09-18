@@ -22,13 +22,14 @@ public class CommentController {
         return commentService.load(storeId);
     }
 
-    @PostMapping("/{storeId}/comments")
+    @PostMapping("/{storeId}/comments/{userId}")
     public List<Comment> addLocationComment(
             @PathVariable Long storeId,
+            @PathVariable String userId,
             @RequestBody Map<String, String> map) throws Exception {
 
 
-        return commentService.add(storeId, map);
+        return commentService.add(storeId, userId, map);
     }
 
 }
