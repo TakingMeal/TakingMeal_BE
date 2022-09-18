@@ -33,10 +33,6 @@ public class User {
     @Column(name = "userGender")
     private String userGender;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "mId")
-//    private Meal meal;
-
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
