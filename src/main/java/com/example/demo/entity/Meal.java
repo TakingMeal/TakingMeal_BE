@@ -3,9 +3,7 @@ package com.example.demo.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -40,6 +38,10 @@ public class Meal {
     @CreationTimestamp
     @Column(updatable = false, name = "mealAddTime")
     private LocalDateTime mealAddTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uId")
+    private User user;
 
     @Builder
     public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat){

@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CardApiDTO;
-import com.example.demo.entity.CardApiEntity;
-import com.example.demo.repository.CardRepository;
+import com.example.demo.dto.LocationApiDTO;
+import com.example.demo.entity.Location;
+import com.example.demo.entity.StoreCategory;
+import com.example.demo.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -25,7 +26,7 @@ import java.net.URLEncoder;
 public class CardApiController {
 
     @Autowired
-    private CardRepository cardRepository;
+    private LocationRepository locationRepository;
 
     @GetMapping("/cardapi")
     public String cardApiParsing() throws ParseException {
@@ -75,8 +76,6 @@ public class CardApiController {
 
             for (int i = 0; i < data.size(); i++) {
 
-                System.out.println("data" + i + " ===========================================");
-
                 //배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
                 JSONObject object = (JSONObject) data.get(i);
 
@@ -96,9 +95,9 @@ public class CardApiController {
 //                System.out.println(lng);
 //
 //                System.out.println();
-                CardApiDTO cardApiDTO = new CardApiDTO(storeName, storeAddress, lat, lng);
-                CardApiEntity entity = new CardApiEntity(cardApiDTO);
-                cardRepository.save(entity);
+                LocationApiDTO locationApiDTO = new LocationApiDTO(storeName, storeAddress, lat, lng, StoreCategory.CARD);
+                Location entity = new Location(locationApiDTO);
+                locationRepository.save(entity);
 
             }
         } catch (ParseException e) {

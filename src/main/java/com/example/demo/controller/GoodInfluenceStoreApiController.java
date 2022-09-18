@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.InfluenceStoreDTO;
-import com.example.demo.entity.InfluenceStoreEntity;
-import com.example.demo.repository.InfluenceStoreRepository;
+import com.example.demo.dto.LocationApiDTO;
+import com.example.demo.entity.Location;
+import com.example.demo.entity.StoreCategory;
+import com.example.demo.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -24,7 +25,7 @@ import java.net.URLEncoder;
 @Slf4j
 public class GoodInfluenceStoreApiController {
     @Autowired
-    private InfluenceStoreRepository influenceStoreRepository;
+    private LocationRepository locationRepository;
 
     @GetMapping("/storeapi")
     public String goodInfluenceStoreApiParsing() throws ParseException {
@@ -89,8 +90,6 @@ public class GoodInfluenceStoreApiController {
 
             for (int i = 0; i < body.size(); i++) {
 
-                System.out.println("body" + i + " ===========================================");
-
                 //배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
                 JSONObject object = (JSONObject) body.get(i);
 
@@ -109,9 +108,9 @@ public class GoodInfluenceStoreApiController {
 //
 //                System.out.println("");
 
-                InfluenceStoreDTO influenceStoreDTO = new InfluenceStoreDTO(storeName, storeAddress, lat, lng);
-                InfluenceStoreEntity entity = new InfluenceStoreEntity(influenceStoreDTO);
-                influenceStoreRepository.save(entity);
+                LocationApiDTO locationApiDTO = new LocationApiDTO(storeName, storeAddress, lat, lng, StoreCategory.GOOD);
+                Location entity = new Location(locationApiDTO);
+                locationRepository.save(entity);
 
             }
         } catch (ParseException e) {
