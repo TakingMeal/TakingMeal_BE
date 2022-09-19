@@ -42,10 +42,6 @@ public class Meal {
     @CreationTimestamp
     @Column(updatable = false, name = "mealAddTime")
     private LocalDateTime mealAddTime;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
     @Builder
     public Meal(String mealName, double mealAmount, double mealCal, double mealCarbon, double mealProtein, double mealFat
