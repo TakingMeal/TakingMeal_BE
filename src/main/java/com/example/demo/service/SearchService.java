@@ -43,7 +43,7 @@ public class SearchService {
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=PE40pSyADxUOfX1WI2BhawGnknXrz6LfLp3NzD5qTJrcO1czoJKlgwuaF5pTsGodQ%2BtD81f%2FXXSZgSZ%2B728Brg%3D%3D"); /*Service Key*/
             urlBuilder.append("&" + URLEncoder.encode("desc_kor", "UTF-8") + "=" + URLEncoder.encode(foodName, "UTF-8")); /*페이지 번호*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과수*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20", "UTF-8")); /*한 페이지 결과수*/
             urlBuilder.append("&type=json"); /*결과 json 포맷*/
 
             URL url = new URL(urlBuilder.toString());
@@ -85,34 +85,37 @@ public class SearchService {
                     JSONObject tmp = (JSONObject) items.get(i);
 
                     Object serving = tmp.get("SERVING_WT");
-                    Double servingWt = Double.parseDouble(String.valueOf(serving));
-
-
-
-                    Object cont1 = tmp.get("NUTR_CONT1");
-                    if(!(cont1.equals("N/A"))) {
-                        nutrCont1 = Double.parseDouble(String.valueOf(cont1));
+                    double servingWT = Double.parseDouble(String.valueOf(serving));
+                    if(servingWT == 0){
+                        System.out.println("열량 미표기 통과");
                     }
 
-                    Object cont2 = tmp.get("NUTR_CONT2");
-                    if(!(cont2.equals("N/A"))) {
-                        nutrCont2 = Double.parseDouble(String.valueOf(cont2));
+                    else {
+                        Object cont1 = tmp.get("NUTR_CONT1");
+                        if (!(cont1.equals("N/A"))) {
+                            nutrCont1 = Double.parseDouble(String.valueOf(cont1));
+                        }
+
+
+                        Object cont2 = tmp.get("NUTR_CONT2");
+                        if (!(cont2.equals("N/A"))) {
+                            nutrCont2 = Double.parseDouble(String.valueOf(cont2));
+                        }
+
+                        Object cont3 = tmp.get("NUTR_CONT3");
+                        if (!(cont3.equals("N/A"))) {
+                            nutrCont3 = Double.parseDouble(String.valueOf(cont3));
+                        }
+
+                        Object cont4 = tmp.get("NUTR_CONT4");
+                        if (!(cont4.equals("N/A"))) {
+                            nutrCont4 = Double.parseDouble(String.valueOf(cont4));
+                        }
+
+                        MealDto mealDto = new MealDto((String) tmp.get("DESC_KOR"), servingWT, nutrCont1, nutrCont2, nutrCont3, nutrCont4);
+
+                        list.add(mealDto);
                     }
-
-                    Object cont3 = tmp.get("NUTR_CONT3");
-                    if(!(cont3.equals("N/A"))) {
-                        nutrCont3 = Double.parseDouble(String.valueOf(cont3));
-                    }
-
-                    Object cont4 = tmp.get("NUTR_CONT4");
-                    if(!(cont4.equals("N/A"))) {
-                        nutrCont4 = Double.parseDouble(String.valueOf(cont4));
-                    }
-
-
-                    MealDto mealDto = new MealDto((String) tmp.get("DESC_KOR"), servingWt, nutrCont1, nutrCont2, nutrCont3, nutrCont4);
-
-                    list.add(mealDto);
                 }
             }
 

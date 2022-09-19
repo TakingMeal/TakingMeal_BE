@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @CrossOrigin
 @Slf4j
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
