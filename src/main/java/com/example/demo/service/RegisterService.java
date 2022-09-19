@@ -26,7 +26,7 @@ public class RegisterService {
     //식단 추가
     public String foodRegister(MealDto mealDto, String userId){
 
-        User user = userRepository.findUserByUserId(userId);
+        User user = userRepository.findByUserId(userId);
         Meal meal = Meal.builder()
                 .user(user)
                 .mealName(mealDto.getMealName())
@@ -46,7 +46,7 @@ public class RegisterService {
 
     public ResponseMealDto foodInfo(String userId){
 
-        User user = userRepository.findUserByUserId(userId);
+        User user = userRepository.findByUserId(userId);
         List<Meal> meals  = mealRepository.findMealByUser(user);
         List<LocalDateTime> times = new ArrayList<>();
         List<LocalDateTime> days = new ArrayList<>();

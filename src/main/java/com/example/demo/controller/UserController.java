@@ -22,6 +22,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+
+    //회원가입 페이지 랜더링
     @GetMapping("/signIn")
     public String signIn(@ModelAttribute User user, Model model){
 
@@ -29,6 +31,8 @@ public class UserController {
         return "/signIn";
     }
 
+
+    //회원가입 form method = post
     @PostMapping("/signInPro")
     public String signInPro(@ModelAttribute User user, Model model, HttpServletRequest request){
 
@@ -37,6 +41,8 @@ public class UserController {
         return "/index";
     }
 
+
+    //로그인 페이지 랜더링
     @GetMapping("/login")
     public String login(@ModelAttribute User user, Model model){
 
@@ -44,6 +50,8 @@ public class UserController {
         return "/login";
     }
 
+
+    //로그인 form method = post
     @PostMapping("/loginPro")
     public String loginPro(@ModelAttribute User user, Model model, HttpServletRequest request, HttpServletResponse response){
 
@@ -51,10 +59,10 @@ public class UserController {
             return "/signIn";
         }
 
-        if(user.getUserId().equals((userRepository.findUserByUserId(user.getUserId()).getUserId()))){
+        if(user.getUserId().equals((userRepository.findByUserId(user.getUserId()).getUserId()))){
             System.out.println("아이디 일치");
 
-            if(user.getUserPw().equals(userRepository.findUserByUserId(user.getUserId()).getUserPw())){
+            if(user.getUserPw().equals(userRepository.findByUserId(user.getUserId()).getUserPw())){
                 System.out.println("로그인 성공");
                 Cookie cookie = new Cookie("userId", String.valueOf(user.getUserId()));
                 response.addCookie(cookie);
@@ -69,6 +77,8 @@ public class UserController {
 
         return "redirect:/";
     }
+
+    //쿠키에서 유저정보 조회 api
     @GetMapping("/getCookie1")
     public String getCookie1(@CookieValue String userId) {
         System.out.println(userId);
