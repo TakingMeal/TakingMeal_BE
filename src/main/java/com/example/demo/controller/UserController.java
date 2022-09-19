@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
 import com.example.demo.repository.MealRepository;
 import com.example.demo.repository.UserRepository;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @CrossOrigin
 @Slf4j
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class UserController {
 
     //회원가입 페이지 랜더링
     @GetMapping("/signIn")
-    public String signIn(@ModelAttribute User user, Model model){
+    public String signIn(@ModelAttribute UserDto userDto, Model model){
 
 
         return "/signIn";
@@ -35,8 +35,9 @@ public class UserController {
 
     //회원가입 form method = post
     @PostMapping("/signInPro")
-    public String signInPro(@ModelAttribute User user, Model model, HttpServletRequest request){
+    public String signInPro(@ModelAttribute UserDto userDto, Model model, HttpServletRequest request){
 
+       User user = new User(userDto.getUserId(), userDto.getUserPw(), userDto.getUserAge(), userDto.getUserGender());
        userRepository.save(user);
 
         return "/index";

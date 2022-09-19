@@ -56,4 +56,11 @@ public class User {
         return getClass().hashCode();
     }
 
+    public User (String userId, String userPw, String userAge, String userGender){
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userAge = userAge;
+        this.userGender= userGender;
+    }
+
 }
