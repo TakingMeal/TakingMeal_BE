@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Getter
+@Setter
 @ToString
 @RequiredArgsConstructor
 @Table(name = "User")
@@ -54,6 +55,13 @@ public class User {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public User (String userId, String userPw, String userAge, String userGender){
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userAge = userAge;
+        this.userGender= userGender;
     }
 
 }

@@ -6,9 +6,7 @@ import com.example.demo.entity.Meal;
 import com.example.demo.entity.User;
 import com.example.demo.repository.MealRepository;
 import com.example.demo.repository.UserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -26,7 +24,7 @@ public class RegisterService {
     //식단 추가
     public String foodRegister(MealDto mealDto, String userId){
 
-        User user = userRepository.findUserByUserId(userId);
+        User user = userRepository.findByUserId(userId);
         Meal meal = Meal.builder()
                 .user(user)
                 .mealName(mealDto.getMealName())
@@ -46,7 +44,7 @@ public class RegisterService {
 
     public ResponseMealDto foodInfo(String userId){
 
-        User user = userRepository.findUserByUserId(userId);
+        User user = userRepository.findByUserId(userId);
         List<Meal> meals  = mealRepository.findMealByUser(user);
         List<LocalDateTime> times = new ArrayList<>();
         List<LocalDateTime> days = new ArrayList<>();

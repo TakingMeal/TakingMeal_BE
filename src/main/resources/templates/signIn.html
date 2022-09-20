@@ -6,19 +6,19 @@
 </head>
 <body>
 
-<form th:action="signInPro" method="post" th:object="${user}">
+<form th:action="signInPro" method="post" th:object="${userDto}">
 
-  <input id="username" type="text" name="username" th:field="*{userId}" placeholder="아이디">
+  <input id="userId" type="text" name="userId" th:field="*{userId}" placeholder="아이디">
   <br>
 
 
-  <input id="password" type="password" name="password" th:field="*{userPw}" placeholder="비밀번호">
+  <input id="userPw" type="password" name="userPw" th:field="*{userPw}" placeholder="비밀번호">
   <br>
 
-  <input id="age" type="password" name="password" th:field="*{userAge}" placeholder="나이">
+  <input id="userAge" type="password" name="userAge" th:field="*{userAge}" placeholder="나이">
   <br>
 
-  <input id="gender" type="password" name="password" th:field="*{userGender}" placeholder="성별">
+  <input id="userGender" type="password" name="userGender" th:field="*{userGender}" placeholder="성별">
   <br>
 
 

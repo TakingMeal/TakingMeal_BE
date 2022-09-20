@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
 import com.example.demo.repository.MealRepository;
 import com.example.demo.repository.UserRepository;
@@ -22,21 +23,28 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+
+    //회원가입 페이지 랜더링
     @GetMapping("/signIn")
-    public String signIn(@ModelAttribute User user, Model model){
+    public String signIn(@ModelAttribute UserDto userDto, Model model){
 
 
         return "/signIn";
     }
 
-    @PostMapping("/signInPro")
-    public String signInPro(@ModelAttribute User user, Model model, HttpServletRequest request){
 
+    //회원가입 form method = post
+    @PostMapping("/signInPro")
+    public String signInPro(@ModelAttribute UserDto userDto, Model model, HttpServletRequest request){
+
+       User user = new User(userDto.getUserId(), userDto.getUserPw(), userDto.getUserAge(), userDto.getUserGender());
        userRepository.save(user);
 
         return "/index";
     }
 
+
+    //로그인 페이지 랜더링
     @GetMapping("/login")
     public String login(@ModelAttribute User user, Model model){
 
@@ -44,6 +52,8 @@ public class UserController {
         return "/login";
     }
 
+
+    //로그인 form method = post
     @PostMapping("/loginPro")
     public String loginPro(@ModelAttribute User user, Model model, HttpServletRequest request, HttpServletResponse response){
 
@@ -51,10 +61,10 @@ public class UserController {
             return "/signIn";
         }
 
-        if(user.getUserId().equals((userRepository.findUserByUserId(user.getUserId()).getUserId()))){
+        if(user.getUserId().equals((userRepository.findByUserId(user.getUserId()).getUserId()))){
             System.out.println("아이디 일치");
 
-            if(user.getUserPw().equals(userRepository.findUserByUserId(user.getUserId()).getUserPw())){
+            if(user.getUserPw().equals(userRepository.findByUserId(user.getUserId()).getUserPw())){
                 System.out.println("로그인 성공");
                 Cookie cookie = new Cookie("userId", String.valueOf(user.getUserId()));
                 response.addCookie(cookie);
@@ -69,6 +79,23 @@ public class UserController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/update")
+    public String userUpdate(@RequestBody UserDto userDto){
+
+
+        System.out.println(userDto.getUserId());
+        User user = userRepository.findByUserId(userDto.getUserId());
+        System.out.println(user);
+        user.setUserAge(userDto.getUserAge());
+        user.setUserGender(userDto.getUserGender());
+        System.out.println(user);
+        userRepository.save(user);
+        return "/index";
+
+    }
+
+    //쿠키에서 유저정보 조회 api
     @GetMapping("/getCookie1")
     public String getCookie1(@CookieValue String userId) {
         System.out.println(userId);
