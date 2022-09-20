@@ -35,11 +35,6 @@ public class User {
     private String userGender;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private List<Meal> meals = new ArrayList<>();
-
-    @JsonIgnore
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<Comment> comments = new ArrayList<>();
