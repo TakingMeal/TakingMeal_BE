@@ -80,6 +80,21 @@ public class UserController {
         return "redirect:/";
     }
 
+    @PostMapping("/update")
+    public String userUpdate(@RequestBody UserDto userDto){
+
+
+        System.out.println(userDto.getUserId());
+        User user = userRepository.findByUserId(userDto.getUserId());
+        System.out.println(user);
+        user.setUserAge(userDto.getUserAge());
+        user.setUserGender(userDto.getUserGender());
+        System.out.println(user);
+        userRepository.save(user);
+        return "/index";
+
+    }
+
     //쿠키에서 유저정보 조회 api
     @GetMapping("/getCookie1")
     public String getCookie1(@CookieValue String userId) {
