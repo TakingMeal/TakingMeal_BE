@@ -42,13 +42,13 @@ public class RegisterService {
 
     }
 
-    public ResponseMealDto foodInfo(String userId){
+    public ResponseMealDto foodInfo(String userId, LocalDateTime date){
 
         User user = userRepository.findByUserId(userId);
         List<Meal> meals  = mealRepository.findMealByUser(user);
-        List<LocalDateTime> times = new ArrayList<>();
         List<LocalDateTime> days = new ArrayList<>();
         List<String> foods = new ArrayList<>();
+        date = date.truncatedTo(ChronoUnit.DAYS);
         days.add(meals.get(0).getMealAddTime().truncatedTo(ChronoUnit.DAYS));
         foods.add(meals.get(0).getMealName());
         double amount = meals.get(0).getMealAmount();
@@ -57,20 +57,23 @@ public class RegisterService {
         double protein = meals.get(0).getMealProtein();
         double fat = meals.get(0).getMealFat();
 
-        for(int i = 1; i < meals.size(); i++){
-            int j = i -1;
 
-            days.add(meals.get(i).getMealAddTime().truncatedTo(ChronoUnit.DAYS));
-            if(days.get(i).equals(days.get(j))){
-                foods.add(meals.get(i).getMealName());
-                amount += meals.get(i).getMealAmount();
-                cal += meals.get(i).getMealCal();
-                car += meals.get(i).getMealCarbon();
-                protein += meals.get(i).getMealProtein();
-                fat += meals.get(i).getMealFat();
+        for(int i = 1; i < meals.size(); i++) {
 
+            int j = i - 1;
+            if (date.equals(days.get(j).truncatedTo(ChronoUnit.DAYS))) {
+                days.add(meals.get(i).getMealAddTime().truncatedTo(ChronoUnit.DAYS));
+                if (days.get(i).equals(days.get(j))) {
+                    foods.add(meals.get(i).getMealName());
+                    amount += meals.get(i).getMealAmount();
+                    cal += meals.get(i).getMealCal();
+                    car += meals.get(i).getMealCarbon();
+                    protein += meals.get(i).getMealProtein();
+                    fat += meals.get(i).getMealFat();
+
+                }
+                System.out.println(amount);
             }
-            System.out.println(amount);
         }
 
         ResponseMealDto responseMealDto = new ResponseMealDto(foods,amount,cal,car, protein, fat, days.get(0).truncatedTo(ChronoUnit.DAYS));

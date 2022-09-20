@@ -27,6 +27,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @CrossOrigin
@@ -74,10 +76,14 @@ public class MealController {
     
 
     //유저 식단 정보 반환 api
-    @GetMapping("/info/{userId}")
-    public ResponseMealDto foodInfo(@PathVariable String userId){
+    @GetMapping("/info/{userId}/{date}")
+    public ResponseMealDto foodInfo(@PathVariable String userId, @PathVariable String date){
 
-        return registerService.foodInfo(userId);
+        String userDate = "2022-09-1 13:47:13.248";
+        userDate = userDate.replace("2022-09-1", "2022-09-" + date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        LocalDateTime dateTime = LocalDateTime.parse(userDate, formatter);
+        return registerService.foodInfo(userId, dateTime);
     }
 
 
