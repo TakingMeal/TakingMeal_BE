@@ -61,9 +61,8 @@ public class RegisterService {
         for(int i = 1; i < meals.size(); i++) {
 
             int j = i - 1;
-            if (date.equals(days.get(j).truncatedTo(ChronoUnit.DAYS))) {
-                days.add(meals.get(i).getMealAddTime().truncatedTo(ChronoUnit.DAYS));
-                if (days.get(i).equals(days.get(j))) {
+            if (date.equals(days.get(j).truncatedTo(ChronoUnit.DAYS))) {    //클라이언트에서 들어온거 vs db 날짜 비교
+                    days.add(meals.get(i).getMealAddTime().truncatedTo(ChronoUnit.DAYS)); //같으면 배열에 추가 21날
                     foods.add(meals.get(i).getMealName());
                     amount += meals.get(i).getMealAmount();
                     cal += meals.get(i).getMealCal();
@@ -72,8 +71,6 @@ public class RegisterService {
                     fat += meals.get(i).getMealFat();
 
                 }
-                System.out.println(amount);
-            }
         }
 
         ResponseMealDto responseMealDto = new ResponseMealDto(foods,amount,cal,car, protein, fat, days.get(0).truncatedTo(ChronoUnit.DAYS));
